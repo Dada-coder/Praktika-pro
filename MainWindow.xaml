@@ -1,0 +1,130 @@
+﻿<Window x:Class="wpf_davai.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wpf_davai"
+        xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Style="{StaticResource MaterialDesignWindow}"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="1000"     
+        MinHeight="600"
+        MinWidth="1000" 
+        MaxHeight="600"
+        MaxWidth="1000"
+        Loaded="Window_Loaded" Closing="Window_Closing">
+    
+    <Grid Background="LightGray">
+
+        <Border x:Name="adminpage" Visibility="Hidden" Panel.ZIndex="1">
+            <TabControl  Grid.Column="1">
+                <TabItem Header="Услуги">
+                    <Grid Background="#FFE5E5E5">
+                        <DataGrid CanUserAddRows="True" AutoGenerateColumns="False" x:Name="Dgauto2" IsReadOnly="False" RowEditEnding="ItemsDataGrid_RowEditEnding" SelectionChanged="Dgauto2_SelectionChanged" AddingNewItem="Dgauto2_AddingNewItem" Margin="0,0,0,93">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Услуги" Binding="{Binding usluga}"  />
+                                <DataGridCheckBoxColumn Header="" Binding="{Binding da}"   IsReadOnly="False" Width="80"/>
+                                <DataGridTextColumn Header="Цена" Binding="{Binding cena}"  />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <TextBox  x:Name="Uslugatextbox" HorizontalAlignment="Left" Margin="21,469,0,0" TextWrapping="Wrap" materialdesign:HintAssist.Hint="Услуга" VerticalAlignment="Top" Width="120"/>
+                        <TextBox x:Name="Cenatextbox" HorizontalAlignment="Left" Margin="169,468,0,0" TextWrapping="Wrap" materialdesign:HintAssist.Hint="Цена" VerticalAlignment="Top" Width="120"/>
+                        <Button Click="Add" Content="Добавить" HorizontalAlignment="Left" Margin="334,469,0,0" VerticalAlignment="Top"/>
+                        <Button Click="Delete" Content="Удалить" HorizontalAlignment="Left" Margin="446,469,0,0" VerticalAlignment="Top"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Заказы">
+                    <Grid Background="#FFE5E5E5">
+                        <DataGrid IsReadOnly="False" AutoGenerateColumns="False" x:Name="dgzakaz2" Margin="0,0,0,93">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="Номер" Binding="{Binding Number}"/>
+                                <DataGridTextColumn Header="Кузов" Binding="{Binding Kuzov}" />
+                                <DataGridTextColumn Header="Услуги" Binding="{Binding usluga}"  />
+                                <DataGridTextColumn Header="Цена" Binding="{Binding cena}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <TextBox  x:Name="Nametextbox" HorizontalAlignment="Left" Margin="21,469,0,0" TextWrapping="Wrap" materialdesign:HintAssist.Hint="Имя" VerticalAlignment="Top" Width="120"/>
+                        <TextBox  x:Name="Uslugatext" HorizontalAlignment="Left" Margin="169,468,0,0" TextWrapping="Wrap" materialdesign:HintAssist.Hint="Услуга" VerticalAlignment="Top" Width="120"/>
+                        <Button Click="Delete2" Content="Удалить" HorizontalAlignment="Left" Margin="334,469,0,0" VerticalAlignment="Top"/>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+
+        </Border>
+
+
+        <Border Visibility="Visible"  Panel.ZIndex="2" x:Name="okno_auth" MinWidth="400" MinHeight="300" Margin="157,0,251,0" Background="lightgray" VerticalAlignment="Center" Padding="30" CornerRadius="20" Grid.Column="1" Height="320" >
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="gray" ShadowDepth="5"></DropShadowEffect>
+            </Border.Effect>
+            <StackPanel>
+                <TextBlock x:Name="VHOD" Foreground="#FFFAFA	" Text="ВХОД" FontFamily="Classic" FontSize="25" FontWeight="black" TextAlignment="Center"/>
+                <Grid Margin="0 20 0 0" Height="210">
+                    <Button   Click="Buttvhod" Padding="5" FontSize="10" Content="Vhod" Margin="0,-9,0,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="74" Height="33" ></Button>
+                    <Button Click="Buttreg" Padding="5"  FontSize="10" Content="Registration" Margin="0,-7,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="73" Height="31"></Button>
+                    <TextBox materialdesign:HintAssist.Hint="Имя"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  x:Name="Loginbox" Margin="0,28,0,147" TextChanged="Loginbox_TextChanged"/>
+
+                    <TextBox materialdesign:HintAssist.Hint="Номер"  x:Name="Passwordbox2" Text="" Margin="0,80,0,102"/>
+                    <Button Click="Button_big" Margin="109,106,95,54">GO</Button>
+                </Grid>
+            </StackPanel>
+        </Border>
+        
+        <Border x:Name="klientpage" Visibility="Visible">
+        <TabControl  Grid.Column="1">
+            <TabItem Header="Тип кузова">
+                <Grid Background="#FFE5E5E5">
+
+                    <Button Background="MediumPurple" x:Name="Btlg" Click="BtLeg" HorizontalAlignment="Left" Margin="40 50 0 0" Padding="0"  VerticalAlignment="Top" Height="450" Width="200" LostFocus="BtLeg_Out">
+                        <Image Margin="0 140 0 0" VerticalAlignment="Top" Source="C:\Users\Underewendowed\Downloads\leg.png" Height="440" Width="193"></Image>
+
+                    </Button>
+                    <Button Background="MediumPurple" x:Name="Btbz" Click="Btbiz" Padding="0"  HorizontalAlignment="Left" Margin="280,50,0,0" VerticalAlignment="Top" Height="450" Width="200" LostFocus="Btbz_Out">
+                        <Image Margin="0 140 0 0" VerticalAlignment="Top" Source="C:\Users\Underewendowed\Downloads\1299198.png" Height="424" Width="184"/>
+                    </Button>
+                    <Button Background="MediumPurple" x:Name="BtVn" Click="BtVned" Padding="0"  HorizontalAlignment="Left" Margin="520,50,0,0" VerticalAlignment="Top" Height="450" Width="200" LostFocus="BtVn_Out">
+                        <Image Margin="0 140 0 0" VerticalAlignment="Top" Source="C:\Users\Underewendowed\Downloads\jip2.png" Height="440" Width="187"></Image>
+                    </Button>
+                    <Button Background="MediumPurple" x:Name="BtMv" Click="BtMvan" Padding="0"  HorizontalAlignment="Left" Margin="760,50,0,0" VerticalAlignment="Top" Height="450" Width="200" LostFocus="BtMv_Out">
+                        <Image Margin="0 100 0 0" VerticalAlignment="Top" Source="C:\Users\Underewendowed\Downloads\bus.png" Height="436" Width="180"></Image>
+                    </Button>
+                    <TextBlock FontWeight="Black" Margin="70 300 0 0"  Foreground="White">Легковой Автомобиль</TextBlock>
+                    <TextBlock FontWeight="Black" Margin="298,300,535,182" Foreground="White">Седан бизнес класса +10%</TextBlock>
+                    <TextBlock FontWeight="Black" Margin="555,300,298,159" Foreground="White">Внедорожники + 20%</TextBlock>
+                    <TextBlock FontWeight="Black" Margin="804,300,79,170" Foreground="White">Минивэны + 30%</TextBlock>
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Услуги" ContextMenuOpening="TabItem_ContextMenuOpening">
+                <Grid Background="#FFE5E5E5">
+                        <DataGrid CanUserAddRows="True" AutoGenerateColumns="False" x:Name="Dgauto" IsReadOnly="False"   SelectionChanged="Dgauto_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn IsReadOnly="True" Header="Услуги" Binding="{Binding usluga}"  />
+                            <DataGridCheckBoxColumn Header="" Binding="{Binding da}"   IsReadOnly="False" Width="80"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Цена" Binding="{Binding cena}"  />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="Оставить заявку" HorizontalAlignment="Left" Margin="12,406,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Заказ">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid IsReadOnly="True" AutoGenerateColumns="False" x:Name="dgzakaz">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Номер" Binding="{Binding Number}"/>
+                            <DataGridTextColumn Header="Кузов" Binding="{Binding Kuzov}" />
+                            <DataGridTextColumn Header="Услуги" Binding="{Binding usluga}"  />
+                            <DataGridTextColumn Header="Цена" Binding="{Binding cena}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                        <Button Click="Reload" Content="Обновить" HorizontalAlignment="Left" Margin="34,470,0,0" VerticalAlignment="Top"/>
+
+                    </Grid>
+            </TabItem>
+        </TabControl>
+        </Border>
+    </Grid>
+
+</Window>
